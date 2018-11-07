@@ -10,6 +10,10 @@ namespace HeaderChecker
         private Boolean valid = false;
         private List<CSFile> csFiles = new List<CSFile>();
 
+        public List<CSFile> CsFiles { get => csFiles; }
+        public bool Valid { get => valid; }
+        public string AbsolutePath { get => absolutePath; }
+
         public VSProjectExplorer(string path)
         {
             this.absolutePath = Path.GetFullPath(path);
@@ -33,7 +37,7 @@ namespace HeaderChecker
             foreach (string file in Directory.GetFiles(absolutePath,"*.cs",SearchOption.AllDirectories))
             {
                 string content = File.ReadAllText(file);
-                csFiles.Add(new CSFile(content));
+                csFiles.Add(new CSFile(file,content));
             }
         }
 
